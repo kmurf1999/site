@@ -5,11 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "build": "NODE_ENV=production babel index.js -d build",
+    "dev": "NODE_ENV=development nodemon index.js --exec babel-node",
+    "start": "node build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "apollo-server-express": "^2.3.3",
+    "compression": "^1.7.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "graphql": "^14.1.1",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.8",
+    "nodemailer": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "nodemon": "^1.18.9"
   }
 }
