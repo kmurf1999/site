@@ -1,0 +1,86 @@
+# https://www.humankode.com/ssl/how-to-set-up-free-ssl-certificates-from-lets-encrypt-using-docker-and-nginx
+version: "3"
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: $PWD/docker/frontend/Dockerfile
+    depends_on:
+      - nginx-proxy
+    restart: always
+    volumes:
+      - ./frontend:/app
+    expose:
+      - "3000"
+    environment:
+      VIRTUAL_HOST: localhost, api.localhost
+      LETSENCRYPT_HOST: localhost
+      LETSENCRYPT_EMAIL: kmurf1999@gmail.com
+    networks:
+      - docker-network
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: $PWD/docker/backend/Dockerfile
+    depends_on:
+      - mongo
+      - nginx-proxy
+    restart: always
+    links:
+      - mongo
+    volumes:
+      - ./backend:/app
+    expose:
+      - "3001"
+    environment:
+      VIRTUAL_HOST: localhost, api.localhost
+      LETSENCRYPT_HOST: localhost
+      LETSENCRYPT_EMAIL: kmurf1999@gmail.com
+    networks:
+      - docker-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    networks:
+      - docker-network
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./docker/nginx/vhost.d:/etc/nginx/vhost.d
+      - ./docker/nginx/certs:/etc/nginx/certs:rw
+      - ./docker/nginx/html:/usr/share/nginx/html
+        #- ./docker/nginx/conf.d/localhost.conf:/etc/nginx/conf.d/localhost.conf:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    networks:
+      - docker-network
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    environment:
+      NGINX_PROXY_CONTAINER: nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./docker/nginx/vhost.d:/etc/nginx/vhost.d
+      - ./docker/nginx/certs:/etc/nginx/certs:rw
+      - ./docker/nginx/html:/usr/share/nginx/html
+
+networks:
+  docker-network:
+    driver: bridge
