@@ -5,7 +5,7 @@ services:
     container_name: frontend
     build:
       context: ./frontend
-      dockerfile: $PWD/docker/frontend/Dockerfile
+      dockerfile: ../docker/frontend/Dockerfile
     depends_on:
       - nginx-proxy
     restart: always
@@ -14,8 +14,8 @@ services:
     expose:
       - "3000"
     environment:
-      VIRTUAL_HOST: localhost, api.localhost
-      LETSENCRYPT_HOST: localhost
+      VIRTUAL_HOST: kylemerfy.com, api.kylemerfy.com
+      LETSENCRYPT_HOST: kylemerfy.com, api.kylemerfy.com
       LETSENCRYPT_EMAIL: kmurf1999@gmail.com
     networks:
       - docker-network
@@ -24,7 +24,7 @@ services:
     container_name: backend
     build:
       context: ./backend
-      dockerfile: $PWD/docker/backend/Dockerfile
+      dockerfile: ../docker/backend/Dockerfile
     depends_on:
       - mongo
       - nginx-proxy
@@ -36,8 +36,8 @@ services:
     expose:
       - "3001"
     environment:
-      VIRTUAL_HOST: localhost, api.localhost
-      LETSENCRYPT_HOST: localhost
+      VIRTUAL_HOST: kylemerfy.com, api.kylemerfy.com
+      LETSENCRYPT_HOST: kylemerfy.com, api.kylemerfy.com
       LETSENCRYPT_EMAIL: kmurf1999@gmail.com
     networks:
       - docker-network
