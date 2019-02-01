@@ -69,3 +69,6 @@ export const media = {
     }
   `
 };
+
+export const fontSize = px => `${px / 16}rem`;
+export const toEm = px => `${px / 16}em`;

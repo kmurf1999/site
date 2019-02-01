@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
-import colors from 'styles/colors';
-import { darken, screens } from 'styles/mixins';
+import colors from '@styles/colors';
+import { darken, screens } from '@styles/mixins';
 
 const animationTime = 1;
 

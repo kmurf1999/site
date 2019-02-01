@@ -53,12 +53,12 @@ class PhonePage extends Component {
     return (
       <PhonePageStyleWrapper className="phone-page">
         <div className="phone-page-header">
-          <div className="phone-page-name">
+          <h1 className="phone-page-name">
             KYLE MURPHY
-          </div>
-          <div className="phone-page-title">
+          </h1>
+          <h2 className="phone-page-title">
             Fullstack Developer
-          </div>
+          </h2>
         </div>
         <SVGInline className="phone-page-svg" svg={Phone}/>
 

@@ -14,9 +14,9 @@ services:
     expose:
       - "3000"
     environment:
-      VIRTUAL_HOST: kylemerfy.com, api.kylemerfy.com
-      LETSENCRYPT_HOST: kylemerfy.com, api.kylemerfy.com
-      LETSENCRYPT_EMAIL: kmurf1999@gmail.com
+      VIRTUAL_HOST: ${FRONTEND_HOST}
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     networks:
       - docker-network
 
@@ -36,9 +36,9 @@ services:
     expose:
       - "3001"
     environment:
-      VIRTUAL_HOST: kylemerfy.com, api.kylemerfy.com
-      LETSENCRYPT_HOST: kylemerfy.com, api.kylemerfy.com
-      LETSENCRYPT_EMAIL: kmurf1999@gmail.com
+      VIRTUAL_HOST: ${BACKEND_HOST}
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     networks:
       - docker-network
 
@@ -60,7 +60,6 @@ services:
       - ./docker/nginx/vhost.d:/etc/nginx/vhost.d
       - ./docker/nginx/certs:/etc/nginx/certs:rw
       - ./docker/nginx/html:/usr/share/nginx/html
-        #- ./docker/nginx/conf.d/localhost.conf:/etc/nginx/conf.d/localhost.conf:ro
     ports:
       - "80:80"
       - "443:443"
@@ -80,6 +79,41 @@ services:
       - ./docker/nginx/vhost.d:/etc/nginx/vhost.d
       - ./docker/nginx/certs:/etc/nginx/certs:rw
       - ./docker/nginx/html:/usr/share/nginx/html
+
+  mail:
+    image: tvial/docker-mailserver:latest
+    hostname: ${MAIL_HOSTNAME}
+    domainname: ${DOMAIN_NAME}
+    container_name: mail
+    ports:
+      - "25:25"
+      - "143:143"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - maildata:/var/mail
+      - mailstate:/var/mail-state
+      - mailconfig:/tmp/docker-mailserver
+      - ./docker/nginx/certs/:/etc/letsencrypt
+      - /etc/localtime:/etc/localtime:ro
+
+  webmail:
+    image: krishath/rainloop-ssl
+    container_name: webmail
+    volumes:
+      - ./docker/nginx/certs/etc/live/${MAIL_FQDN}/fullchain.pem:/etc/ssl/cert.pem
+      - ./docker/nginx/certs/etc/live/${MAIL_FQDN}/privkey.pem:/etc/ssl/cert.key
+      - ./docker/dhparam.pem:/etc/ssl/certs/dhparam.pem
+      - webmaildata:/webapps/rainloop/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "443:443"
+
+volumes:
+  maildata:
+    driver: local
+  mailstate:
+    driver: local
 
 networks:
   docker-network:

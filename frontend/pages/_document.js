@@ -19,7 +19,7 @@ export default class SiteDocument extends Document {
       <html lang="en">
         <Head>
           <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+          <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86"/>
           <link rel="shortcut icon" sizes="16x16 32x32 48x48 64x64 128x128" href="/static/favicon.ico"/>
           <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet" />

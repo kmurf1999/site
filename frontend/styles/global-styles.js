@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from './css-reset';
-//import typography from './typography';
+import typography from '@styles/typography';
 
 // eslint-disable-next-line
 const GlobalStyle = createGlobalStyle`
@@ -38,6 +38,8 @@ const GlobalStyle = createGlobalStyle`
     -moz-appearance: none;
     appearance: none;
   }
+
+  ${typography}
 
 `;
 
