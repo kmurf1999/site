@@ -83,7 +83,7 @@ services:
   mail:
     image: tvial/docker-mailserver:latest
     hostname: ${MAIL_HOSTNAME}
-    domainname: ${DOMAIN_NAME}
+    domainname: ${DOMAINNAME}
     container_name: mail
     ports:
       - "25:25"
@@ -93,7 +93,7 @@ services:
     volumes:
       - maildata:/var/mail
       - mailstate:/var/mail-state
-      - mailconfig:/tmp/docker-mailserver
+      - ./docker/mailserver/config:/tmp/docker-mailserver
       - ./docker/nginx/certs/:/etc/letsencrypt
       - /etc/localtime:/etc/localtime:ro
 
