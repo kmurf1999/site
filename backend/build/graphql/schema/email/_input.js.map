@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../graphql/schema/email/_input.js"],"names":["Input","gql"],"mappings":";;;;;;;AAAA;;AAEA,MAAMA,KAAK,GAAGC,wBAAI;;;;CAAlB;;eAMe,MAAM,CAACD,KAAD,C","sourcesContent":["import { gql } from 'apollo-server-express';\n\nconst Input = gql`\n  input emailsFilterInput {\n    limit: Int\n  }\n`;\n\nexport default () => [Input];\n"],"file":"_input.js"}
