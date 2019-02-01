@@ -37,7 +37,7 @@ services:
       - "3001"
     environment:
       VIRTUAL_HOST: ${BACKEND_HOST}
-      LETSENCRYPT_HOST: ${FRONTEND_HOST}
+      LETSENCRYPT_HOST: ${BACKEND_HOST}
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     networks:
       - docker-network
@@ -80,38 +80,32 @@ services:
       - ./docker/nginx/certs:/etc/nginx/certs:rw
       - ./docker/nginx/html:/usr/share/nginx/html
 
-        #  mail:
-        #    image: tvial/docker-mailserver:latest
-        #    hostname: ${MAIL_HOSTNAME}
-        #    domainname: ${DOMAINNAME}
-        #    container_name: mail
-        #    ports:
-        #      - "25:25"
-        #      - "143:143"
-        #      - "587:587"
-        #      - "993:993"
-        #    volumes:
-        #      - maildata:/var/mail
-        #      - mailstate:/var/mail-state
-        #      - ./docker/mailserver/config:/tmp/docker-mailserver
-        #      - ./docker/nginx/certs/:/etc/letsencrypt
-        #      - /etc/localtime:/etc/localtime:ro
-        #
-        #  webmail:
-        #    image: krishath/rainloop-ssl
-        #    container_name: webmail
-        #    volumes:
-        #      - ./docker/nginx/certs/etc/live/${MAIL_FQDN}/fullchain.pem:/etc/ssl/cert.pem
-        #      - ./docker/nginx/certs/etc/live/${MAIL_FQDN}/privkey.pem:/etc/ssl/cert.key
-        #      - ./docker/dhparam.pem:/etc/ssl/certs/dhparam.pem
-        #      - webmaildata:/webapps/rainloop/data
-        #      - /etc/localtime:/etc/localtime:ro
+  mail:
+    image: tvial/docker-mailserver:latest
+    hostname: ${MAIL_HOSTNAME}
+    domainname: ${DOMAINNAME}
+    container_name: mail
+    environment:
+      LETSENCRYPT_HOST: mail.kylemerfy.com
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+    ports:
+      - "143:143"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - maildata:/var/mail
+      - mailstate:/var/mail-state
+      - ./docker/mailserver/config:/tmp/docker-mailserver
+      - ./docker/nginx/certs/:/etc/letsencrypt
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - docker-network
 
-        #volumes:
-        #  maildata:
-        #    driver: local
-        #  mailstate:
-        #    driver: local
+volumes:
+  maildata:
+    driver: local
+  mailstate:
+    driver: local
 
 networks:
   docker-network:
