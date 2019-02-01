@@ -1,5 +1,6 @@
 node_modules/
 
+backend/build
 docker/nginx/certs
 
 .env
