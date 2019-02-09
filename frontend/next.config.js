@@ -4,7 +4,9 @@ module.exports = {
   /**
    * env variables
    */
-  apolloURI: process.env.APOLLO_URI,
+  publicRuntimeConfig: {
+    apolloURI: process.env.APOLLO_URI,
+  },
   webpack: config => {
     // Fixes npm packages that depend on `fs` module
     config.node = {

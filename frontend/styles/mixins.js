@@ -72,3 +72,16 @@ export const media = {
 
 export const fontSize = px => `${px / 16}rem`;
 export const toEm = px => `${px / 16}em`;
+
+export function boxShadow(elevation) {
+  return `
+    box-shadow: 0 ${elevation}px ${3 * elevation}px rgba(0,0,0,${0.12
+    * elevation}), 0 ${elevation}px ${2 * elevation}px rgba(0,0,0,${0.24 * elevation})
+  `;
+}
+
+export function boxShadowTransition() {
+  return `
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1)
+  `;
+}

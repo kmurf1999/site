@@ -28,7 +28,13 @@ const ContactStyleWrapper = styled.div`
   }
 
   .contact-form {
-
+    position: relative;
+    text-align: justify;
+    max-width: 400px;
+    margin: 0 auto;
+    .contact-form-input {
+      margin-bottom: 5px;
+    }
   }
 
 `;
