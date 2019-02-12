@@ -37,13 +37,13 @@ class TextArea extends Component {
     focus: false
   };
 
-  focus = e => {
+  onFocus = e => {
     const { onFocus } = this.props;
     this.setState({ focus: true });
     if (onFocus) onFocus(e);
   }
 
-  blur = e => {
+  onBlur = e => {
     const { onBlur } = this.props;
     this.setState({ focus: false });
     if (onBlur) onBlur(e);
@@ -51,11 +51,12 @@ class TextArea extends Component {
 
   render() {
     const {
-      name, onChange, onFocus, onBlur,
+      name, onChange,
       type, value, leftIcon,
       helpText, status, placeholder,
-      focus, className, width
+      className, width
     } = this.props;
+    const { focus } = this.state;
 
     let statusIcon;
     switch(status) {

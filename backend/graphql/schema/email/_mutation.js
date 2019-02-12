@@ -21,7 +21,7 @@ export const mutationResolvers = {
       if (typeof name === 'undefined') name = '';
 
       const messageConfig = {
-        to: 'kmurf1999@gmail.com',
+        to: 'kyle@kylemerfy.com',
         from: hostEmail,
         subject: `Work Email from ${name} - ${from}`,
         body: message,

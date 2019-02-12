@@ -20,29 +20,25 @@ const SEND_EMAIL = gql`
   }
 `;
 
+const DEFAULT_FIELD = {
+  value: '',
+  touched: false,
+  error: null,
+  status: null
+};
+
 class Contact extends Component {
+  static defaultProps = {
+    className: ''
+  };
+
   constructor() {
     super();
     this.state = {
       loading: false,
-      email: {
-        value: '',
-        touched: false,
-        error: null,
-        status: null
-      },
-      name: {
-        value: '',
-        touched: false,
-        error: null,
-        status: null
-      },
-      message: {
-        value: '',
-        touched: false,
-        error: null,
-        status: null
-      }
+      email: Object.assign({}, DEFAULT_FIELD),
+      name: Object.assign({}, DEFAULT_FIELD),
+      message: Object.assign({}, DEFAULT_FIELD)
     };
   }
 
@@ -124,8 +120,13 @@ class Contact extends Component {
             name: this.state.name.value,
             message: this.state.name.value
           }
-        }).then(res => console.log(res))
-          .catch(err => console.log(err))
+        }).then(res => {
+          this.setState({
+            email: Object.assign({}, DEFAULT_FIELD),
+            name: Object.assign({}, DEFAULT_FIELD),
+            message: Object.assign({}, DEFAULT_FIELD)
+          });
+        }).catch(err => console.log(err))
           .finally(() => this.setState({ loading: false }));
 
       } else this.setState({ loading: false });
@@ -133,17 +134,10 @@ class Contact extends Component {
   }
 
   render() {
-    const { onIndexPage } = this.props;
     const { email, name, message, loading } = this.state;
+    const { className } = this.props;
     return (
-      <ContactStyleWrapper className="contact">
-        {onIndexPage && (
-          <svg className="contact-svg-top" preserveAspectRatio="none" viewBox="0 0 100 100">
-            <polygon points="30, 100 100, 100, 100, 0" fill="#000" opacity="0.1" />
-            <polygon points="0,0 100,0 100, 10" fill="#2a2d38" />
-            <polygon points="0, 90 0, 100 100, 100" fill={colors.footer} />
-          </svg>
-        )}
+      <ContactStyleWrapper className={["contact", className].join(' ')}>
 
         <h1 className="contact-title">
           Contact

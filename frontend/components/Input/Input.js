@@ -42,13 +42,13 @@ class Input extends Component {
     focus: false
   };
 
-  focus = e => {
+  onFocus = e => {
     const { onFocus } = this.props;
     this.setState({ focus: true });
     if (onFocus) onFocus(e);
   }
 
-  blur = e => {
+  onBlur = e => {
     const { onBlur } = this.props;
     this.setState({ focus: false });
     if (onBlur) onBlur(e);
@@ -56,11 +56,12 @@ class Input extends Component {
 
   render() {
     const {
-      name, onChange, onFocus, onBlur,
+      name, onChange,
       type, value, leftIcon, rightIcon,
       helpText, status, placeholder,
-      focus, className, width
+      className, width
     } = this.props;
+    const { focus } = this.state;
 
     let statusIcon;
     switch(status) {
@@ -78,7 +79,6 @@ class Input extends Component {
       }
       default: statusIcon = null;
     }
-
 
     return (
       <InputStyleWrapper width={width} className={className} focus={focus} status={status}>
