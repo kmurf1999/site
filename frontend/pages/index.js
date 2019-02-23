@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import colors from '@styles/colors';
-import NoNav from '../layouts/Main';
+import Main from '../layouts/Main';
 import PhonePage from '@components/PhonePage';
 import Contact from '@components/Contact';
 
@@ -24,7 +24,7 @@ class IndexPage extends Component {
     // y = -0.03 + (1.1) / (1 / (x/0.6)^6.665)
 
     return (
-      <NoNav>
+      <Main>
         <PhonePage/>
         {/**       <LinksWrapper className="links-wrapper">
 
@@ -40,7 +40,7 @@ class IndexPage extends Component {
           </svg>
           <Contact className="contact-form"/>
         </div>
-      </NoNav>
+      </Main>
     );
   }
 }

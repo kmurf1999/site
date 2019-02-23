@@ -42,6 +42,16 @@ class Footer extends Component {
                   <a>Home</a>
                 </Link>
               </li>
+              <li className="footer-sitemap-link">
+                <Link href="/about">
+                  <a>About</a>
+                </Link>
+              </li>
+              <li className="footer-sitemap-link">
+                <Link href="/contact">
+                  <a>Contact</a>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

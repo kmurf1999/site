@@ -43,7 +43,7 @@ const ButtonStyleWrapper = styled.div`
   .button-background-active {
     ${absoluteFullWidth}
     width: ${props => props.loading ? '100%' : '0%'};
-    background: ${colors.blue};
+    background: ${props => props.color};
     transition: width .3s;
   }
 

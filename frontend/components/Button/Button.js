@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import ButtonStyleWrapper from './Button.style';
 import Spinner from '@components/Spinner';
+import colors from '@styles/colors';
 
 const Button = ({
   onClick, type, className, children,
-  loading, disabled, width, icon
+  loading, disabled, width, icon, color
 }) => (
   <ButtonStyleWrapper
     width={width}
@@ -16,6 +17,7 @@ const Button = ({
     loading={loading}
     tabIndex="0"
     role="button"
+    color={color}
   >
     <div className="button-background"/>
     <div className="button-background-active"/>
@@ -39,7 +41,8 @@ Button.defaultProps = {
   disabled: false,
   type: '',
   className: '',
-  width: 'auto'
+  width: 'auto',
+  color: colors.blue
 };
 
 export default Button;
