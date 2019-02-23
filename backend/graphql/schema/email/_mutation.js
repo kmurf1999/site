@@ -36,11 +36,14 @@ export const mutationResolvers = {
         message,
       });
 
-      await transporter.sendMail(messageConfig, (err, info) => {
-        if (err) throw new Error("Message Send Failure");
-      });
-
-      return email.toGraph();
+      return new Promise((resolve, reject) =>
+        transporter.sendMail(messageConfig, (err, info) => {
+          if (err) reject(err);
+          if (info) resolve(info);
+        })).then(info => email.toGraph())
+           .catch(err => {
+             throw new Error(err);
+           });
     }
   }
 };

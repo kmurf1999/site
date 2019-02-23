@@ -35,7 +35,7 @@ class IndexPage extends Component {
         >
           <svg className="contact-svg-top" preserveAspectRatio="none" viewBox="0 0 100 100">
             <polygon points="30, 100 100, 100, 100, 0" fill="#000" opacity="0.1" />
-            <polygon points="0,0 100,0 100, 10" fill={colors.red} />
+            <polygon points="0,0 100,0 100, 10" fill="#2a2d38" />
             <polygon points="0, 90 0, 100 100, 100" fill={colors.footer} />
           </svg>
           <Contact className="contact-form"/>
