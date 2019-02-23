@@ -6,8 +6,6 @@ services:
     build:
       context: ./frontend
       dockerfile: ../docker/frontend/Dockerfile
-    depends_on:
-      - nginx-proxy
     restart: always
     volumes:
       - ./frontend:/app
@@ -27,7 +25,6 @@ services:
       dockerfile: ../docker/backend/Dockerfile
     depends_on:
       - mongo
-      - nginx-proxy
     restart: always
     links:
       - mongo
@@ -49,8 +46,6 @@ services:
     ports:
       - "27017:27017"
     command: mongod --smallfiles --logpath=/dev/null # --quiet
-    networks:
-      - docker-network
 
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -82,22 +77,50 @@ services:
 
   mail:
     image: tvial/docker-mailserver:latest
+    restart: always
     hostname: ${MAIL_HOSTNAME}
     domainname: ${DOMAINNAME}
     container_name: mail
     environment:
-      LETSENCRYPT_HOST: mail.kylemerfy.com
+      LETSENCRYPT_HOST: ${MAIL_FQDN}
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      ENABLE_SPAMASSASSIN: 1
+      ENABLE_CLAMAV: 1
+      ENABLE_FAIL2BAN: 1
+      ENABLE_POSTGREY: 1
+      ONE_DIR: 1
+      DMS_DEBUG: 0
+      ENABLE_MANAGESIEVE: 1
+      SSL_TYPE: manual
+      SSL_CERT_PATH: /tmp/ssl/${MAIL_FQDN}.crt
+      SSL_KEY_PATH: /tmp/ssl/${MAIL_FQDN}.key
+    cap_add:
+      - NET_ADMIN
     ports:
+      - "25:25"
       - "143:143"
       - "587:587"
       - "993:993"
+      - "4190:4190"
     volumes:
       - maildata:/var/mail
       - mailstate:/var/mail-state
+      - ./docker/nginx/certs:/tmp/ssl/:ro
+        #- ./docker/nginx/certs/${MAIL_FQDN}.crt:/tmp/ssl/${MAIL_FQDN}.crt:ro
+        #      - ./docker/nginx/certs/${MAIL_FQDN}.chain.pem:/tmp/ssl/${MAIL_FQDN}.chain.pem:ro
+        #      - ./docker/nginx/certs/${MAIL_FQDN}.dhparam.pem:/tmp/ssl/${MAIL_FQDN}.dhparam.pem:ro
       - ./docker/mailserver/config:/tmp/docker-mailserver
-      - ./docker/nginx/certs/:/etc/letsencrypt
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      - docker-network
+
+  webmail:
+    container_name: webmail
+    image: hardware/rainloop
+    volumes:
+      - webmaildata:/rainloop/data
+    links:
+      - mail
     networks:
       - docker-network
 
@@ -105,6 +128,8 @@ volumes:
   maildata:
     driver: local
   mailstate:
+    driver: local
+  webmaildata:
     driver: local
 
 networks:
