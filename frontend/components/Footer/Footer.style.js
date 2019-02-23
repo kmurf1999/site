@@ -17,8 +17,8 @@ const FooterStyleWrapper = styled.div`
       align-items: center;
       text-align: center;
       .footer-panel {
-        margin-right: 0;
         margin-bottom: 16px;
+        margin-right: 0 !important;
       }
     }
 
