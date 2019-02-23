@@ -36,6 +36,7 @@ services:
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     networks:
       - docker-network
+      - mongo-network
 
   mongo:
     image: mongo:latest
@@ -47,7 +48,7 @@ services:
     volumes:
       - mongodb:/data/db
     networks:
-      - docker-network
+      - mongo-network
 
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -84,8 +85,6 @@ services:
     domainname: ${DOMAINNAME}
     container_name: mail
     environment:
-      LETSENCRYPT_HOST: ${MAIL_FQDN}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
       ENABLE_SPAMASSASSIN: 1
       ENABLE_CLAMAV: 1
       ENABLE_FAIL2BAN: 1
@@ -94,8 +93,8 @@ services:
       DMS_DEBUG: 0
       ENABLE_MANAGESIEVE: 1
       SSL_TYPE: manual
-      SSL_CERT_PATH: /tmp/ssl/${MAIL_FQDN}.crt
-      SSL_KEY_PATH: /tmp/ssl/${MAIL_FQDN}.key
+      SSL_CERT_PATH: /tmp/ssl/fullchain.pem
+      SSL_KEY_PATH: /tmp/ssl/key.pem
     cap_add:
       - NET_ADMIN
     ports:
@@ -107,24 +106,26 @@ services:
     volumes:
       - maildata:/var/mail
       - mailstate:/var/mail-state
-      - ./docker/nginx/certs:/tmp/ssl/:ro
-        #- ./docker/nginx/certs/${MAIL_FQDN}.crt:/tmp/ssl/${MAIL_FQDN}.crt:ro
-        #      - ./docker/nginx/certs/${MAIL_FQDN}.chain.pem:/tmp/ssl/${MAIL_FQDN}.chain.pem:ro
-        #      - ./docker/nginx/certs/${MAIL_FQDN}.dhparam.pem:/tmp/ssl/${MAIL_FQDN}.dhparam.pem:ro
+      - ./docker/nginx/certs/${MAIL_FQDN}:/tmp/ssl/:ro
       - ./docker/mailserver/config:/tmp/docker-mailserver
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - docker-network
+      - mail-network
 
   webmail:
     container_name: webmail
     image: hardware/rainloop
     volumes:
       - webmaildata:/rainloop/data
+    environment:
+      VIRTUAL_HOST: ${MAIL_FQDN}
+      LETSENCRYPT_HOST: ${MAIL_FQDN}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     links:
       - mail
     networks:
       - docker-network
+      - mail-network
 
 volumes:
   mongodb:
@@ -138,4 +139,8 @@ volumes:
 
 networks:
   docker-network:
+    driver: bridge
+  mail-network:
+    driver: bridge
+  mongo-network:
     driver: bridge
