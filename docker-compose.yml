@@ -57,6 +57,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./docker/nginx/vhost.d:/etc/nginx/vhost.d
       - ./docker/nginx/certs:/etc/nginx/certs:rw
+      - ./docker/nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./docker/nginx/html:/usr/share/nginx/html
     ports:
       - "80:80"
