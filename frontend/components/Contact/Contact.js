@@ -8,6 +8,8 @@ import Input from '@components/Input';
 import TextArea from '@components/TextArea';
 import Button from '@components/Button';
 
+import { NotificationContext } from '../../context/notification';
+
 import ContactStyleWrapper from './Contact.style';
 
 const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -28,6 +30,8 @@ const DEFAULT_FIELD = {
 };
 
 class Contact extends Component {
+  static contextType = NotificationContext;
+
   static defaultProps = {
     className: ''
   };
@@ -126,9 +130,16 @@ class Contact extends Component {
             name: Object.assign({}, DEFAULT_FIELD),
             message: Object.assign({}, DEFAULT_FIELD)
           });
-        }).catch(err => console.log(err))
-          .finally(() => this.setState({ loading: false }));
-
+          this.context.notify(
+            'success',
+            'Message sent'
+          );
+        }).catch(err => {
+          this.context.notify(
+            'error',
+            'Error sending message'
+          );
+        }).finally(() => this.setState({ loading: false }));
       } else this.setState({ loading: false });
     });
   }
@@ -191,7 +202,7 @@ class Contact extends Component {
                 onClick={e => this.submit(e, sendEmail)}
                 type="submit"
                 className="contact-form-submit"
-                width="150px"
+                width="100px"
                 icon={<MdArrowForward/>}
                 loading={loading}
               >

@@ -16,6 +16,7 @@ const ContactStyleWrapper = styled.div`
 
   .contact-sub-title {
     color: ${colors.gray};
+    margin-bottom: 16px;
   }
 
   .contact-form {
@@ -25,6 +26,9 @@ const ContactStyleWrapper = styled.div`
     margin: 0 auto;
     .contact-form-input {
       margin-bottom: 5px;
+    }
+    .contact-form-submit {
+      margin-left: auto;
     }
   }
 

@@ -3,28 +3,32 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 
 import Footer from '@components/Footer';
-import GlobalStyles from '../styles/global-styles';
+import GlobalStyles from '@styles/global-styles';
+import NotificationProvider, { NotificationConsumer } from '../context/notification';
 
 const Main = ({ children, title }) => (
   <div>
-    <Head>
-      <title>
-        {title}
-      </title>
-    </Head>
+    <NotificationProvider>
+      <Head>
+        <title>
+          {title}
+        </title>
+      </Head>
 
-    <header>
+      <header>
 
-    </header>
+      </header>
 
-    <main>
-      {children}
-    </main>
+      <main>
+        <NotificationConsumer/>
+        {children}
+      </main>
 
-    <footer>
-      <Footer/>
-    </footer>
-    <GlobalStyles nav={true} />
+      <footer>
+        <Footer/>
+      </footer>
+      <GlobalStyles nav={true} />
+    </NotificationProvider>
   </div>
 );
 

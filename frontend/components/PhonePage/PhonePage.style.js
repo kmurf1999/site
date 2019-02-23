@@ -75,10 +75,6 @@ const PhonePageStyleWrapper = styled.div`
       letter-spacing: 5px;
       margin-left: 5px;
       text-align: justify;
-      @media only screen and (max-width: ${screens.sm}) {
-        text-align: center;
-        margin-bottom: 10px;
-      }
     }
 
     .phone-page-title {
@@ -87,7 +83,14 @@ const PhonePageStyleWrapper = styled.div`
       text-shadow: ${colors.red} 2px 4px;
       text-align: justify;
       font-size: 72px;
-      @media only screen and (max-width: ${screens.sm}) {
+    }
+
+    @media only screen and (max-width: 680px) {
+      .phone-page-name {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .phone-page-title {
         text-align: center;
         font-size: 60px;
       }
@@ -97,12 +100,16 @@ const PhonePageStyleWrapper = styled.div`
   .phone-page-svg {
     width: 100%;
     height: 100%;
+    display: block;
     > svg {
       max-width: 500px;
       overflow: visible;
-      padding: 150px 0;
-      @media only screen and (max-width: ${screens.sm}) {
-        padding: 100px 0;
+      padding-top: 150px;
+      @media only screen and (max-width: 680px) {
+        padding-top: 100px;
+      }
+      @media only screen and (max-width: 400px) {
+        padding-top: 80px;
       }
       > g {
         transition: all 0.3s ease !important;

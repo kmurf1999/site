@@ -62,6 +62,7 @@ const ButtonStyleWrapper = styled.div`
       height: 25px;
       width: 25px;
       margin-left: 10px;
+      float: right;
     }
   }
 
