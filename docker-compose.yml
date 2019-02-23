@@ -26,8 +26,6 @@ services:
     depends_on:
       - mongo
     restart: always
-    links:
-      - mongo
     volumes:
       - ./backend:/app
     expose:
@@ -46,6 +44,10 @@ services:
     ports:
       - "27017:27017"
     command: mongod --smallfiles --logpath=/dev/null # --quiet
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - docker-network
 
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -125,6 +127,8 @@ services:
       - docker-network
 
 volumes:
+  mongodb:
+    driver: local
   maildata:
     driver: local
   mailstate:
