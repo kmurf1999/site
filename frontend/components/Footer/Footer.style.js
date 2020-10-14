@@ -48,10 +48,13 @@ const FooterStyleWrapper = styled.div`
       text-decoration: none;
       display: inline-block;
       margin-right: 15px;
-      > svg {
-        width: 25px;
-        height: 25px;
-        &:hover { fill: ${colors.orange}; }
+      > a {
+        > svg {
+          color: white;
+          width: 25px;
+          height: 25px;
+          &:hover { fill: ${colors.orange}; }
+        }
       }
     }
   }

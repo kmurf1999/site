@@ -12,8 +12,8 @@ const absoluteFullWidth = `
 `;
 
 const ButtonStyleWrapper = styled.div`
-  cursor: pointer;
   height: 40px;
+  line-height: 40px;
   ${boxShadow(1)};
   ${boxShadowTransition()};
   width: ${props => props.width};
@@ -48,6 +48,7 @@ const ButtonStyleWrapper = styled.div`
   }
 
   .button-button {
+    cursor: pointer;
     color: ${props => props.loading ? 'white' : colors.darkGray};
     background: transparent;
     border: 0;
@@ -56,7 +57,7 @@ const ButtonStyleWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: middle;
+    align-items: center;
     padding-left: 10px;
     > svg {
       height: 25px;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
-import { FaTwitter, FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 import FooterStyleWrapper from './Footer.style';
 
@@ -13,13 +13,14 @@ class Footer extends Component {
             <div className="footer-title">Follow Me</div>
             <ul className="footer-social-bar">
               <li className="footer-social-link">
-                <FaTwitter/>
+                <a href="https://github.com/kmurf1999/">
+                  <FaGithub/>
+                </a>
               </li>
               <li className="footer-social-link">
-                <FaGithub/>
-              </li>
-              <li className="footer-social-link">
-                <FaLinkedinIn/>
+                <a href="https://www.linkedin.com/in/kyle-w-murphy/">
+                  <FaLinkedinIn/>
+                </a>
               </li>
             </ul>
           </div>
@@ -27,10 +28,7 @@ class Footer extends Component {
             <div className="footer-title">Contact</div>
             <ul className="footer-contact">
               <li className="footer-contact-item">
-                kyle@kylemerfy.com
-              </li>
-              <li className="footer-contact-item">
-                734 660 4026
+                kmurf1999@gmail.com
               </li>
             </ul>
           </div>
