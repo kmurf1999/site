@@ -1271,12 +1271,14 @@ browserify-zlib@^0.2.0:
     pako "~1.0.5"
 
 browserslist@^4.1.0:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.4.1.tgz#42e828954b6b29a7a53e352277be429478a69062"
+  version "4.16.6"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.6.tgz#d7901277a5a88e554ed305b183ec9b0c08f66fa2"
   dependencies:
-    caniuse-lite "^1.0.30000929"
-    electron-to-chromium "^1.3.103"
-    node-releases "^1.1.3"
+    caniuse-lite "^1.0.30001219"
+    colorette "^1.2.2"
+    electron-to-chromium "^1.3.723"
+    escalade "^3.1.1"
+    node-releases "^1.1.71"
 
 buffer-from@^1.0.0:
   version "1.1.1"
@@ -1357,9 +1359,9 @@ camelize@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
 
-caniuse-lite@^1.0.30000929:
-  version "1.0.30000933"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000933.tgz#5871ff54b3177675ae1c2a275b2aae7abf2b9222"
+caniuse-lite@^1.0.30001219:
+  version "1.0.30001228"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001228.tgz#bfdc5942cd3326fa51ee0b42fbef4da9d492a7fa"
 
 case-sensitive-paths-webpack-plugin@2.1.2:
   version "2.1.2"
@@ -1462,6 +1464,10 @@ color-convert@^1.9.0:
 color-name@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
+
+colorette@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
 
 commander@~2.13.0:
   version "2.13.0"
@@ -1754,9 +1760,9 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.3.103:
-  version "1.3.109"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.109.tgz#ee04a55a5157a5580a5ea88e526b02c84a3a7bc8"
+electron-to-chromium@^1.3.723:
+  version "1.3.736"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.736.tgz#f632d900a1f788dab22fec9c62ec5c9c8f0c4052"
 
 elliptic@^6.0.0:
   version "6.4.1"
@@ -1838,6 +1844,10 @@ es-to-primitive@^1.2.0:
     is-callable "^1.1.4"
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
+
+escalade@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -3052,11 +3062,13 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.1.3:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.6.tgz#47d160033e24a64e79487a62de63cf691052ec54"
-  dependencies:
-    semver "^5.3.0"
+node-releases@^1.1.71:
+  version "1.1.72"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.72.tgz#14802ab6b1039a79a0c7d662b610a5bbd76eacbe"
+
+nodemailer@^6.4.14:
+  version "6.6.1"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.1.tgz#2a05fbf205b897d71bf43884167b5d4d3bd01b99"
 
 nopt@^4.0.1:
   version "4.0.1"
@@ -3494,14 +3506,14 @@ react-apollo@^2.4.1:
     lodash.isequal "^4.5.0"
     prop-types "^15.6.0"
 
-react-dom@^16.7.0:
-  version "16.7.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.7.0.tgz#a17b2a7ca89ee7390bc1ed5eb81783c7461748b8"
+react-dom@^16.14.0:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.12.0"
+    scheduler "^0.19.1"
 
 react-error-overlay@4.0.0:
   version "4.0.0"
@@ -3522,14 +3534,13 @@ react-svg-inline@^2.1.1:
     classnames "^2.2.1"
     prop-types "^15.5.8"
 
-react@^16.7.0:
-  version "16.7.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
+react@^16.14.0:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.12.0"
 
 read-pkg@^2.0.0:
   version "2.0.0"
@@ -3714,9 +3725,9 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scheduler@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.12.0.tgz#8ab17699939c0aedc5a196a657743c496538647b"
+scheduler@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
